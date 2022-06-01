@@ -1,4 +1,4 @@
-object WallService{
+object WallService {
     private var posts = emptyArray<Post>()
 
     fun add(post: Post): Post {
@@ -11,15 +11,30 @@ object WallService{
     fun update(post: Post): Boolean {
         for ((index, postForSearch) in posts.withIndex()) {
             if (postForSearch.id == post.id) {
-                posts[index] =
-                    post.copy(ownerId = posts[index].ownerId, date = posts[index].date)
+
+                posts[index] = post.copy(ownerId = posts[index].ownerId, date = posts[index].date)
                 return true
             }
         }
         return false
     }
 
-    fun removeAll() {
+    fun removeAll(){
         posts = emptyArray()
+
+    }
+
+    fun printWall(){
+        if (posts.isEmpty()) {
+            println("Empty")
+        }else {
+            for (i in posts) {
+                i.toString()
+                println(i.toString())
+            }
+        }
+    }
+    fun isEmpty(): Boolean {
+        return posts.isEmpty()
     }
 }
