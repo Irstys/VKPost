@@ -1,5 +1,6 @@
 object WallService {
     private var posts = emptyArray<Post>()
+    private var comments = emptyArray<Comment>()
 
     fun add(post: Post): Post {
         if (!posts.contains(post)) {
@@ -36,5 +37,16 @@ object WallService {
     }
     fun isEmpty(): Boolean {
         return posts.isEmpty()
+    }
+    fun createComment(comment: Comment): Boolean {
+        for (postForSearch in posts) {
+            if (comment.postId == postForSearch.id) {
+                comments +=comment
+                return true
+            }
+        }
+        throw PostNotFoundException ("нет поста с данным ID${comment.postId}")
+    }
+    class PostNotFoundException(massage: String) : RuntimeException(massage) {
     }
 }
